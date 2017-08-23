@@ -3,24 +3,71 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-// route-level code splitting
-const createListView = id => () => import('../views/CreateListView').then(m => m.default(id))
-const ItemView = () => import('../views/ItemView.vue')
-const UserView = () => import('../views/UserView.vue')
-
-export function createRouter () {
-  return new Router({
-    mode: 'history',
-    scrollBehavior: () => ({ y: 0 }),
-    routes: [
-      { path: '/top/:page(\\d+)?', component: createListView('top') },
-      { path: '/new/:page(\\d+)?', component: createListView('new') },
-      { path: '/show/:page(\\d+)?', component: createListView('show') },
-      { path: '/ask/:page(\\d+)?', component: createListView('ask') },
-      { path: '/job/:page(\\d+)?', component: createListView('job') },
-      { path: '/item/:id(\\d+)', component: ItemView },
-      { path: '/user/:id', component: UserView },
-      { path: '/', redirect: '/top' }
-    ]
-  })
-}
+export default new Router({
+    linkActiveClass: 'active',
+    base: '/',
+    routes: [{
+        path: '/index',
+        name: 'Index',
+        component: function(resolve) {
+            require(['@/pages/Index.vue'], resolve)
+        }
+    }, {
+        path: '/matron',
+        name: 'Matron',
+        component: function(resolve) {
+            require(['@/pages/Matron.vue'], resolve)
+        }
+    }, {
+        path: '/matron/:id',
+        name: 'MatronDetail',
+        component: function(resolve) {
+            require(['@/pages/matron-detail.vue'], resolve)
+        }
+    }, {
+        path: '/nursery',
+        name: 'Nursery',
+        component: function(resolve) {
+            require(['@/pages/Nursery.vue'], resolve)
+        }
+    }, {
+        path: '/nursery/:id',
+        name: 'NurseryDetail',
+        component: function(resolve) {
+            require(['@/pages/matron-detail.vue'], resolve)
+        }
+    }, {
+        path: '/parenting',
+        name: 'Parenting',
+        component: function(resolve) {
+            require(['@/pages/Parenting.vue'], resolve)
+        }
+    }, {
+        path: '/parenting/article/:id',
+        name: 'ArticleDetail',
+        component: function(resolve) {
+            require(['@/pages/article-detail.vue'], resolve)
+        }
+    }, {
+        path: '/join',
+        name: 'Join',
+        component: function(resolve) {
+            require(['@/pages/Join.vue'], resolve)
+        }
+    }, {
+        path: '/about',
+        name: 'About',
+        component: function(resolve) {
+            require(['@/pages/About.vue'], resolve)
+        }
+    }, {
+        path: '*',
+        redirect: '/index'
+    }],
+    scrollBehavior(to, from, savedPosition) {
+        return {
+            x: 0,
+            y: 0
+        }
+    }
+})

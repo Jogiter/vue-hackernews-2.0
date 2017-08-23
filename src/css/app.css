@@ -1,0 +1,100 @@
+* {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+@font-face {
+    font-family: Yuanti;
+    src: url(Yuanti.ttf);
+}
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: " ";
+}
+.active {
+    color: #ff9933 !important;
+}
+.clearfix:after {
+    clear: both;
+}
+.container {
+    width: 1000px;
+    margin: 0 auto;
+}
+.color-default {
+    color: #ff9967;
+}
+.center-block {
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.text-center {
+    text-align: center;
+}
+.text-lfet {
+    text-align: lfet;
+}
+.text-right {
+    text-align: right;
+}
+select,
+button,
+input {
+    outline: none;
+}
+img {
+    vertical-align: top;
+}
+a {
+    text-decoration: none;
+}
+.desc {
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-all;
+}
+.swiper-wrapper img {
+    width: 100%;
+    height: auto;
+}
+.fb {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-between;
+}
+.fa {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: space-around;
+}
+.mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.fxww {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+/*address css*/
+.address select {
+    width: 100px !important;
+}
+/*https://github.com/WickyNilliams/headroom.js*/
+.headroom--pinned {
+    transform: translateY(0);
+}
+.headroom--unpinned {
+    transform: translateY(-100%);
+}
