@@ -5,13 +5,14 @@ import VueResource from 'vue-resource'
 Vue.use(VueX)
 Vue.use(VueResource)
 
-let host = location.origin + '/website'
-//let host = 'http://api.padmom.com/website'
+// let host = location.origin + '/website'
+let host = 'http://api.padmom.com/website'
 
 let v = new Vue()
+
 function ErrorHandle(res) {
     v.$popup({
-         message: res.msg
+        message: res.msg
     })
 }
 
@@ -55,7 +56,9 @@ export default new VueX.Store({
         }
     },
     actions: {
-        getAll({ commit }) {
+        getAll({
+            commit
+        }) {
             Vue.http.get(`${host}/home`).then(res => {
                 if (res.body.code == 0) {
                     commit('setAll', res.body.data)
@@ -64,7 +67,9 @@ export default new VueX.Store({
                 }
             })
         },
-        getCategory({ commit }, {
+        getCategory({
+            commit
+        }, {
             id,
             pagesize,
             pageno
@@ -77,7 +82,9 @@ export default new VueX.Store({
                 }
             })
         },
-        getArticle({ commit }, {
+        getArticle({
+            commit
+        }, {
             id
         }) {
             Vue.http.get(`${host}/article/${id}`).then(res => {
@@ -99,7 +106,9 @@ export default new VueX.Store({
                 }
             })
         },
-        getServerInfo({ commit }, {
+        getServerInfo({
+            commit
+        }, {
             id
         }) {
             Vue.http.get(`${host}/babysitter/${id}`).then(res => {
