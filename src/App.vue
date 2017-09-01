@@ -3,21 +3,21 @@
     <v-header></v-header>
     <router-view></router-view>
     <v-footer></v-footer>
-    <!-- <v-recommond></v-recommond> -->
-    <!-- <vue-up></vue-up> -->
+    <v-recommond></v-recommond>
+    <vue-up></vue-up>
 </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
-// import Recommond from './components/Recommond.vue'
+import Recommond from './components/Recommond.vue'
 export default {
     name: 'app',
     components: {
         'v-header': Header,
         'v-footer': Footer,
-        // 'v-recommond': Recommond
+        'v-recommond': Recommond
     }
 }
 </script>

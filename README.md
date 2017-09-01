@@ -56,6 +56,14 @@ npm run build
 npm start
 ```
 
+## issues
+
+1. `vuex`的`mapGetter`、`mapAction`在ssr中不能使用，需要使用`this.$store[dispatch|state]`来替换
+2. 部分组件，不一定支持ssr，需要处理
+3. `vue-loader`中`style`使用`scoped`不生效
+4. `v-distpicker`不支持ssr，待处理
+
+
 ## License
 
 MIT

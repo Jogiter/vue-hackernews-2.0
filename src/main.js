@@ -4,10 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import store from './store'
 import router from './router'
-// import VueUp from 'vueup'
+import VueUp from 'vueup'
 
-require('minireset.css')
-require('./css/app.css')
+// require('minireset.css')
+// require('./css/app.css')
 
 Vue.use(VueUp)
 

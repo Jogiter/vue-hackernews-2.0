@@ -80,19 +80,19 @@
 </template>
 
 <script>
-import {
-    mapActions,
-    mapGetters
-} from 'vuex'
+// import {
+//     mapActions,
+//     mapGetters
+// } from 'vuex'
 import {
     formatData
 } from '../lib/util'
-import VDistpicker from 'v-distpicker'
+// import VDistpicker from 'v-distpicker'
 
 export default {
     name: 'footer',
     components: {
-        VDistpicker
+        // VDistpicker
     },
     data() {
         return {
@@ -132,9 +132,12 @@ export default {
         }
     },
     methods: {
-        ...mapActions({
-            getPrice: 'getPrice'
-        }),
+        // ...mapActions({
+        //     getPrice: 'getPrice'
+        // }),
+        getPrice(payload) {
+            this.$store.dispatch('getPrice', payload)
+        },
         tabView() {
             if (this.type === 'getprice') {
                 this.type = 'recommed'
