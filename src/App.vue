@@ -22,7 +22,10 @@ export default {
 }
 </script>
 
-<style lang="scss">@import url("http://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css");
+<style lang="scss">
+@import url("http://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css");
+@import url("./css/app.css");
+@import url('./css/reset.css');
 #app {
     min-width: 1000px;
     /*padding-top: 150px;*/

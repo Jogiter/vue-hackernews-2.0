@@ -3,7 +3,7 @@
         <!-- <ul class="nav">
             <li v-for="item in navbars"><a :href="item.link" v-text="item.text"></a></li>
         </ul> -->
-        
+
         <div class="bottom_left fl">
              <div class="contact">
                 <img :src="contact.icon" alt="" class="icon">
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-       
+
     </footer>
 </template>
 
@@ -59,7 +59,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
     footer {
         margin: 0 auto;
         background-color: #ff9966;
@@ -139,7 +139,7 @@
             margin-left: 10px;
         }
         .qrcode_font{
-            text-align: center;    
+            text-align: center;
         }
     }
 </style>

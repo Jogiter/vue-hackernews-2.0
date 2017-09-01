@@ -15,14 +15,20 @@
     export default {
         name: 'Error',
         computed: {
-            ...mapGetters({
-                'article': 'article',
-            })
+            article() {
+                return this.$store.state.article
+            },
+            // ...mapGetters({
+            //     'article': 'article',
+            // })
         },
         methods: {
-            ...mapActions([
-                'getArticle'
-            ])
+            // ...mapActions([
+            //     'getArticle'
+            // ])
+            getArticle(payload) {
+                this.$store.dispatch('getArticle', payload)
+            },
         },
         mounted() {
             this.getArticle({
@@ -32,7 +38,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .article {
     background-color: #ededeb;
     overflow: hidden;

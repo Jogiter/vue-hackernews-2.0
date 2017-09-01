@@ -136,8 +136,8 @@ export default {
         // ...mapActions([
         //     'getAll'
         // ]),
-        getAll() {
-            this.$store.dispatch('getAll')
+        getAll(payload) {
+            this.$store.dispatch('getAll', payload)
         },
         tabNav(index) {
             this.activeIndex = index
@@ -170,7 +170,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .content {
     background-color: #ededeb;
     .banner {

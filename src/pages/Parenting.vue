@@ -1,11 +1,19 @@
 <template>
 <div class="content">
-    <swiper :options="swiperOption" ref="mySwiper" class="banner">
+    <!-- <swiper :options="swiperOption" ref="mySwiper" class="banner">
         <swiper-slide v-for="(slide, index) in swiperSlides" :key="index">
             <a :href="slide.link"><img :src="slide.img" alt="slide.text"></a>
         </swiper-slide>
         <div class="swiper-pagination"  slot="pagination"></div>
-    </swiper>
+    </swiper> -->
+    <div v-swiper:mySwiper="swiperOption">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(slide, index) in swiperSlides" :key="index">
+                <a :href="slide.link"><img :src="slide.img" alt="slide.text"></a>
+            </div>
+        </div>
+        <div class="swiper-pagination swiper-pagination-bullets"></div>
+    </div>
     <div class="navbars">
         <div class="fa container tabs">
             <span class="tab line" :class="activeIndex == index ? 'on' : ''" @click="changeTab(index, item.id)" v-for="(item, index) in tabs">{{item.name}}</span>
@@ -31,23 +39,35 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import {
-    swiper,
-    swiperSlide
-} from 'vue-awesome-swiper'
+// import { mapActions, mapGetters } from 'vuex'
+// import {
+//     swiper,
+//     swiperSlide
+// } from 'vue-awesome-swiper'
+
+import Vue from 'vue'
+if (process.browser) {
+    const VueAwesomeSwiper = require('vue-awesome-swiper/ssr')
+    Vue.use(VueAwesomeSwiper)
+}
 
 export default {
     name: 'Parenting',
     components: {
-        swiper: swiper,
-        'swiper-slide': swiperSlide
+        // swiper: swiper,
+        // 'swiper-slide': swiperSlide
     },
     computed: {
-        ...mapGetters({
-            swiperSlides: 'banner',
-            lists: 'category',
-        }),
+        swiperSlides() {
+            return this.$store.state.banner
+        },
+        lists() {
+            return this.$store.state.category
+        },
+        // ...mapGetters({
+        //     swiperSlides: 'banner',
+        //     lists: 'category',
+        // }),
         tabs() {
             return this.lists.categories
         },
@@ -76,9 +96,12 @@ export default {
         }
     },
     methods: {
-        ...mapActions([
-            'getCategory'
-        ]),
+        // ...mapActions([
+        //     'getCategory'
+        // ]),
+        getCategory(payload) {
+            this.$store.dispatch('getCategory', payload)
+        },
         changeTab(index, id) {
             this.id = id;
             this.pageno = 1
@@ -126,7 +149,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .navbars {
     margin-top: 50px;
     margin-bottom: 0px;

@@ -53,17 +53,27 @@
 </template>
 
 <script>
-    import { mapActions, mapGetters } from 'vuex'
-
+    // import { mapActions, mapGetters } from 'vuex'
+    import Vue from 'vue'
+    if (process.browser) {
+        const VueAwesomeSwiper = require('vue-awesome-swiper/ssr')
+        Vue.use(VueAwesomeSwiper)
+    }
     export default {
         name: 'MatronDetail',
         computed: {
-            ...mapGetters({
-                swiperSlides: 'banner',
-                info:  'server',
-                // articles: 'articles',
-                // nursemaid: 'recommended_nursemaid',
-            })
+            swiperSlides() {
+                return this.$store.state.banner
+            },
+            info() {
+                return this.$store.state.server
+            },
+            // ...mapGetters({
+            //     swiperSlides: 'banner',
+            //     info:  'server',
+            //     // articles: 'articles',
+            //     // nursemaid: 'recommended_nursemaid',
+            // })
         },
         data() {
             return {
@@ -99,10 +109,16 @@
             }
         },
         methods: {
-            ...mapActions([
-                'getServerInfo',
-                'order'
-            ]),
+            // ...mapActions([
+            //     'getServerInfo',
+            //     'order'
+            // ]),
+            getServerInfo(payload) {
+                this.$store.dispatch('getServerInfo', payload)
+            },
+            order(payload) {
+                this.$store.dispatch('order', payload)
+            },
             showOrder() {
                 this.showForm = true
             },
@@ -134,7 +150,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .detail {
     background-color: #ededeb;
     overflow: hidden;

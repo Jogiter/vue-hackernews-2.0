@@ -1,11 +1,19 @@
 <template>
     <div>
-        <swiper :options="swiperOption" ref="mySwiper" class="banner">
+        <!-- <swiper :options="swiperOption" ref="mySwiper" class="banner">
             <swiper-slide v-for="(slide, index) in swiperSlides" :key="index">
                 <a :href="slide.link"><img :src="slide.img" alt="slide.text"></a>
             </swiper-slide>
             <div class="swiper-pagination"  slot="pagination"></div>
-        </swiper>
+        </swiper> -->
+        <div v-swiper:mySwiper="swiperOption">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" v-for="(slide, index) in swiperSlides" :key="index">
+                    <a :href="slide.link"><img :src="slide.img" alt="slide.text"></a>
+                </div>
+            </div>
+            <div class="swiper-pagination swiper-pagination-bullets"></div>
+        </div>
         <section class="works">
             <h2 class="title" v-text="part1.title"></h2>
             <ul class="fb fxww container">
@@ -62,21 +70,35 @@
 </template>
 
 <script>
-    import { mapActions, mapGetters } from 'vuex'
-    import { swiper, swiperSlide } from 'vue-awesome-swiper'
+    // import { mapActions, mapGetters } from 'vuex'
+    // import { swiper, swiperSlide } from 'vue-awesome-swiper'
+    import Vue from 'vue'
+    if (process.browser) {
+        const VueAwesomeSwiper = require('vue-awesome-swiper/ssr')
+        Vue.use(VueAwesomeSwiper)
+    }
 
     export default {
         name: 'Matron',
         components: {
-            swiper: swiper,
-            'swiper-slide': swiperSlide
+            // swiper: swiper,
+            // 'swiper-slide': swiperSlide
         },
         computed: {
-            ...mapGetters({
-                swiperSlides: 'banner',
-                part3: 'recommended_nursemaid',
-                part4: 'faq',
-            })
+            swiperSlides() {
+                return this.$store.state.banner
+            },
+            part3() {
+                return this.$store.state.recommended_nursemaid
+            },
+            part4() {
+                return this.$store.state.faq
+            },
+            // ...mapGetters({
+            //     swiperSlides: 'banner',
+            //     part3: 'recommended_nursemaid',
+            //     part4: 'faq',
+            // })
         },
         data() {
             return {
@@ -148,9 +170,12 @@
             }
         },
         methods: {
-            ...mapActions([
-                'getAll'
-            ]),
+            // ...mapActions([
+            //     'getAll'
+            // ]),
+            getAll(payload) {
+                this.$store.dispatch('getAll', payload)
+            },
             viewDetail(id) {
                 this.$router.push({
                     name: 'NurseryDetail',
@@ -174,7 +199,7 @@
     }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
     .works {
         overflow: hidden;
         background-color: #f7f7f7;

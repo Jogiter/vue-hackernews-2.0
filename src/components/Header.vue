@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 ol,
 ul {
     padding: 0;

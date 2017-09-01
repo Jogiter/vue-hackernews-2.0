@@ -1,11 +1,19 @@
 <template>
 <div class="content">
-    <swiper :options="swiperOption" ref="mySwiper" class="banner">
+    <!-- <swiper :options="swiperOption" ref="mySwiper" class="banner">
         <swiper-slide v-for="(slide, index) in swiperSlides" :key="index">
             <a :href="slide.link"><img :src="slide.img" alt="slide.text"></a>
         </swiper-slide>
         <div class="swiper-pagination"  slot="pagination"></div>
-    </swiper>
+    </swiper> -->
+    <div v-swiper:mySwiper="swiperOption">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(slide, index) in swiperSlides" :key="index">
+                <a :href="slide.link"><img :src="slide.img" alt="slide.text"></a>
+            </div>
+        </div>
+        <div class="swiper-pagination swiper-pagination-bullets"></div>
+    </div>
     <section class="services">
         <div class="fb container">
             <div class="service" v-for="service in services">
@@ -35,21 +43,30 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import {
-    swiper,
-    swiperSlide
-} from 'vue-awesome-swiper'
+// import { mapActions, mapGetters } from 'vuex'
+// import {
+//     swiper,
+//     swiperSlide
+// } from 'vue-awesome-swiper'
+
+import Vue from 'vue'
+if (process.browser) {
+    const VueAwesomeSwiper = require('vue-awesome-swiper/ssr')
+    Vue.use(VueAwesomeSwiper)
+}
 export default {
     name: 'Parenting',
     components: {
-        swiper: swiper,
-        'swiper-slide': swiperSlide
+        // swiper: swiper,
+        // 'swiper-slide': swiperSlide
     },
     computed: {
-        ...mapGetters({
-            swiperSlides: 'banner',
-        })
+        swiperSlides() {
+            return this.$store.state.banner
+        },
+        // ...mapGetters({
+        //     swiperSlides: 'banner',
+        // })
     },
     data() {
         return {
@@ -100,9 +117,12 @@ export default {
         }
     },
     methods: {
-        ...mapActions([
-            'getAll'
-        ]),
+        // ...mapActions([
+        //     'getAll'
+        // ]),
+        getAll(payload) {
+            this.$store.dispatch('getAll', payload)
+        },
         join() {
             this.$router.push({
                 name: 'Join'
@@ -115,7 +135,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .services {
     width: 100%;
     padding-top: 40px;
